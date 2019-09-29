@@ -19,6 +19,22 @@ public class Token {
 	ServiceType serviceType;
 	CounterServiceType counterService;
 
+	public Token() {
+		super();
+	}
+
+	public Token(Long tokenId, TokenStatus status, String comments, String actionItem, Long customerId,
+			ServiceType serviceType, CounterServiceType counterService) {
+		super();
+		this.tokenId = tokenId;
+		this.status = status;
+		this.comments = comments;
+		this.actionItem = actionItem;
+		this.customerId = customerId;
+		this.serviceType = serviceType;
+		this.counterService = counterService;
+	}
+
 	public CounterServiceType getCounterService() {
 		return counterService;
 	}

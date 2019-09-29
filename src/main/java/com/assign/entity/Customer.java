@@ -17,6 +17,19 @@ public class Customer {
 	String Address;
 	ServiceType serviceType;
 
+	public Customer(Long customerId, String name, Long phoneNumber, String address, ServiceType serviceType) {
+		super();
+		this.customerId = customerId;
+		this.name = name;
+		this.phoneNumber = phoneNumber;
+		Address = address;
+		this.serviceType = serviceType;
+	}
+
+	public Customer() {
+		super();
+	}
+
 	public Long getId() {
 		return customerId;
 	}
