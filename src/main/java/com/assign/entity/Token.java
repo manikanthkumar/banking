@@ -1,13 +1,31 @@
 package com.assign.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Tokens")
 public class Token {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long tokenId;
 	TokenStatus status;
 	String comments;
 	String actionItem;
 	Long customerId;
 	ServiceType serviceType;
-//	List<Service> services;
+	CounterServiceType counterService;
+
+	public CounterServiceType getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterServiceType counterService) {
+		this.counterService = counterService;
+	}
 
 	public Long getTokenId() {
 		return tokenId;

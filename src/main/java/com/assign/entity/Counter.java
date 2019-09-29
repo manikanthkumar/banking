@@ -1,16 +1,35 @@
 package com.assign.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Counters")
 public class Counter {
-	int counterId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Long counterId;
 	String counterName;
 	Long presentToken;
 	ServiceType serviceType;
+	CounterServiceType counterService;
 
-	public int getCounterId() {
+	public CounterServiceType getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterServiceType counterService) {
+		this.counterService = counterService;
+	}
+
+	public Long getCounterId() {
 		return counterId;
 	}
 
-	public void setCounterId(int counterId) {
+	public void setCounterId(Long counterId) {
 		this.counterId = counterId;
 	}
 

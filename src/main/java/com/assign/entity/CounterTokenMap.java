@@ -1,9 +1,25 @@
 package com.assign.entity;
 
-public class CounterTokenMap {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "CounterTokenMappings")
+public class CounterTokenMap {
+	@Id
 	Long tokenId;
-	int counterId;
+	Long counterId;
+
+	public CounterTokenMap() {
+		super();
+	}
+
+	public CounterTokenMap(Long tokenId, Long counterId) {
+		super();
+		this.tokenId = tokenId;
+		this.counterId = counterId;
+	}
 
 	public Long getTokenId() {
 		return tokenId;
@@ -13,11 +29,11 @@ public class CounterTokenMap {
 		this.tokenId = tokenId;
 	}
 
-	public int getCounterId() {
+	public Long getCounterId() {
 		return counterId;
 	}
 
-	public void setCounterId(int counterId) {
+	public void setCounterId(Long counterId) {
 		this.counterId = counterId;
 	}
 
