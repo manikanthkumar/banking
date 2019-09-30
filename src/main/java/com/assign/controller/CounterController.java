@@ -23,8 +23,9 @@ public class CounterController {
 	public Counter createCounter(@RequestBody Counter counter) {
 		return service.createCounter(counter);
 	}
-	
+
 	@GetMapping("/")
 	public List<Counter> getCounterInfo() {
-		return service.getAllCounters();	}
+		return service.getAllCounters();
+	}
 }
