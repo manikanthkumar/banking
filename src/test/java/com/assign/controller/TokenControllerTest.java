@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 import org.junit.Before;
@@ -67,7 +68,7 @@ public class TokenControllerTest {
 		when(custService.getCustomerById(1L)).thenReturn(new Customer());
 
 		MvcResult result = mockMvc
-				.perform(post("/tokens/issueToken/1/deposit").contentType(MediaType.APPLICATION_JSON_UTF8)).andReturn();
+				.perform(get("/tokens/issueToken/1/deposit").contentType(MediaType.APPLICATION_JSON_UTF8)).andReturn();
 
 		String tokenId = result.getResponse().getContentAsString();
 		Long actualTokenId = 1L;
@@ -94,7 +95,7 @@ public class TokenControllerTest {
 		when(service.changeTokenCounter(1L, CounterServiceType.deposit)).thenReturn(1L);
 
 		MvcResult result = mockMvc
-				.perform(post("/tokens/changeTokenCounter/1/deposit").contentType(MediaType.APPLICATION_JSON_UTF8))
+				.perform(get("/tokens/changeTokenCounter/1/deposit").contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andReturn();
 
 		String tokenId = result.getResponse().getContentAsString();

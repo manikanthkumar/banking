@@ -1,6 +1,7 @@
 package com.assign.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,7 @@ public class TokenController {
 		return "Updated token status Successfully";
 	}
 
-	@PostMapping("/issueToken/{customerId}/{counterServiceType}")
+	@GetMapping("/issueToken/{customerId}/{counterServiceType}")
 	public Long issueTokenToCustomer(@PathVariable Long customerId, @PathVariable CounterServiceType counterServiceType)
 			throws RecordNotFoundException {
 		return service.issueToken(customerService.getCustomerById(customerId), counterServiceType);
@@ -44,7 +45,7 @@ public class TokenController {
 		return service.issueToken(customerService.createCustomer(customer), counterServiceType);
 	}
 
-	@PostMapping("/changeTokenCounter/{tokenId}/{counterServiceType}")
+	@GetMapping("/changeTokenCounter/{tokenId}/{counterServiceType}")
 	public Long assignCustomerToCounterServiceType(@PathVariable Long tokenId,
 			@PathVariable CounterServiceType counterServiceType) throws RecordNotFoundException {
 		return service.changeTokenCounter(tokenId, counterServiceType);

@@ -80,7 +80,8 @@ public class TokenServiceImpl implements TokenService {
 	@Override
 	public Long issueToken(Customer customer, CounterServiceType counterServiceType) {
 		Token token = createToken(customer.getId(), customer.getServiceType());
-		return assignTokenToCounter(customer, counterServiceType, token.getTokenId());
+		assignTokenToCounter(customer, counterServiceType, token.getTokenId());
+		return token.getTokenId();
 	}
 
 	@Override
@@ -89,20 +90,6 @@ public class TokenServiceImpl implements TokenService {
 		fetchNextTokenForPresentCounterId(tokenId);
 		return assignTokenToCounter(customerService.getCustomerById(token.getCustomerId()), counterServiceType,
 				tokenId);
-	}
-
-	private void fetchNextTokenForPresentCounterId(Long tokenId) throws RecordNotFoundException {
-		Long counterId = counterTokenMapService.getCounterIdFromTokenId(tokenId);
-		counterTokenMapService.deleteMapByTokenId(tokenId);
-		List<CounterTokenMap> maps = counterTokenMapService.getByCounterId(counterId);
-		Counter counter = counterService.getCounterById(counterId);
-		if (maps.isEmpty()) {
-			counter.setPresentToken(null);
-		} else {
-			counter.setPresentToken(maps.get(0).getTokenId());
-		}
-		counterService.updateCounter(counter);
-
 	}
 
 	private Long assignTokenToCounter(Customer customer, CounterServiceType counterServiceType, Long tokenId) {
@@ -129,7 +116,20 @@ public class TokenServiceImpl implements TokenService {
 			counterService.updateCounter(counterToSet);
 		}
 		counterTokenMapService.createMap(new CounterTokenMap(tokenId, counterIdToSet));
-		return tokenId;
+		return counterIdToSet;
 	}
 
+	private void fetchNextTokenForPresentCounterId(Long tokenId) throws RecordNotFoundException {
+		Long counterId = counterTokenMapService.getCounterIdFromTokenId(tokenId);
+		counterTokenMapService.deleteMapByTokenId(tokenId);
+		List<CounterTokenMap> maps = counterTokenMapService.getByCounterId(counterId);
+		Counter counter = counterService.getCounterById(counterId);
+		if (maps.isEmpty()) {
+			counter.setPresentToken(null);
+		} else {
+			counter.setPresentToken(maps.get(0).getTokenId());
+		}
+		counterService.updateCounter(counter);
+
+	}
 }
