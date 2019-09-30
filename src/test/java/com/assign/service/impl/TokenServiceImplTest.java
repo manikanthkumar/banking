@@ -119,7 +119,11 @@ public class TokenServiceImplTest {
 	@Test
 	public void testChangeTokenCounter() throws Exception {
 		when(counterTokenMapService.deleteMapByTokenId(1L)).thenReturn("Deleted Successfully");
+		when(counterTokenMapService.getCounterIdFromTokenId(1L)).thenReturn(1L);
+		when(counterTokenMapService.getByCounterId(1L)).thenReturn(maps);
+		when(counterService.updateCounter(any(Counter.class))).thenReturn(counters.get(0));
 		when(customerService.getCustomerById(1L)).thenReturn(customers.get(0));
+		when(counterService.getCounterById(1L)).thenReturn(counters.get(0));
 		Optional<Token> token1 = Optional.of(token);
 		when(repo.findById(1L)).thenReturn(token1);
 		List<Counter> counter = new ArrayList<>();
