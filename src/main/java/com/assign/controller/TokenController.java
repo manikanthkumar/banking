@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.assign.entity.CounterServiceType;
@@ -26,8 +25,8 @@ public class TokenController {
 	@Autowired
 	private CustomerService customerService;
 
-	@PostMapping("/updateTokenStatus/{tokenId}")
-	public String updateTokenStatus(@RequestParam TokenStatus tokenStatus, @PathVariable Long tokenId)
+	@GetMapping("/updateTokenStatus/{tokenId}/{tokenStatus}")
+	public String updateTokenStatus(@PathVariable TokenStatus tokenStatus, @PathVariable Long tokenId)
 			throws RecordNotFoundException {
 		service.updateTokenStatus(tokenStatus, tokenId);
 		return "Updated token status Successfully";

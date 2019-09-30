@@ -53,8 +53,8 @@ public class TokenControllerTest {
 	public void testUpdateTokenStatus() throws Exception {
 		doNothing().when(service).updateTokenStatus(TokenStatus.completed, 1L);
 
-		MvcResult result = mockMvc.perform(post("/tokens/updateTokenStatus/1")
-				.param("tokenStatus", TokenStatus.completed.toString()).contentType(MediaType.APPLICATION_JSON_UTF8))
+		MvcResult result = mockMvc
+				.perform(get("/tokens/updateTokenStatus/1/completed").contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andReturn();
 
 		String resultString = result.getResponse().getContentAsString();
