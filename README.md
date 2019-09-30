@@ -17,3 +17,7 @@ Create an endpoint "/tokens/changeTokenCounter/{tokenId}/{counterServiceType}" (
 
 Service to Change the status of Token:
 Created an endpoint "/tokens/updateTokenStatus/{tokenId}/{tokenStatus}" (GET) which takes tokenId and tokenStatus to which the token has to be updated and the token is updated accordingly. 
+
+
+
+SWAGGER URL to access all the endpoints: http://localhost:8080/swagger-ui.html
