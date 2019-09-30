@@ -59,10 +59,11 @@ public class CounterTokenMapServiceImplTest {
 
 	@Test
 	public void testGetByCounterId() {
-		when(repo.findAll()).thenReturn(maps);
 		List<CounterTokenMap> maps1 = new ArrayList<>();
 		maps1.add(maps.get(3));
 		maps1.add(maps.get(4));
+		when(repo.findByCounterId(2L)).thenReturn(maps1);
+
 		assertEquals(maps1, service.getByCounterId(2L));
 	}
 

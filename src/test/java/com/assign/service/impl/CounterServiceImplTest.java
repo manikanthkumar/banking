@@ -69,10 +69,11 @@ public class CounterServiceImplTest {
 
 	@Test
 	public void testGetCounterByService() {
-		when(repo.findAll()).thenReturn(counters);
 		List<Counter> counters1 = new ArrayList<>();
 		counters1.add(counters.get(5));
 		counters1.add(counters.get(6));
+		when(repo.findByServiceType(ServiceType.REGULAR)).thenReturn(counters1);
+
 		assertEquals(counters1, service.getCounterByService(ServiceType.REGULAR));
 	}
 
@@ -84,9 +85,10 @@ public class CounterServiceImplTest {
 
 	@Test
 	public void testGetCounterByServiceAndCounterServiceType() {
-		when(repo.findAll()).thenReturn(counters);
 		List<Counter> counters1 = new ArrayList<>();
 		counters1.add(counters.get(5));
+		when(repo.findByServiceTypeAndCounterService(ServiceType.REGULAR, CounterServiceType.deposit))
+				.thenReturn(counters1);
 		assertEquals(counters1,
 				service.getCounterByServiceAndCounterServiceType(ServiceType.REGULAR, CounterServiceType.deposit));
 	}

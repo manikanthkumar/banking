@@ -2,7 +2,6 @@ package com.assign.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,8 +40,7 @@ public class CounterServiceImpl implements CounterService {
 
 	@Override
 	public List<Counter> getCounterByService(ServiceType serviceType) {
-		return getAllCounters().parallelStream().filter(counter -> counter.getServiceType().equals(serviceType))
-				.collect(Collectors.toList());
+		return repo.findByServiceType(serviceType);
 	}
 
 	@Override
@@ -53,8 +51,7 @@ public class CounterServiceImpl implements CounterService {
 	@Override
 	public List<Counter> getCounterByServiceAndCounterServiceType(ServiceType serviceType,
 			CounterServiceType counterServiceType) {
-		return getAllCounters().parallelStream().filter(counter -> (counter.getServiceType().equals(serviceType)
-				&& counter.getCounterService().equals(counterServiceType))).collect(Collectors.toList());
+		return repo.findByServiceTypeAndCounterService(serviceType, counterServiceType);
 	}
 
 }

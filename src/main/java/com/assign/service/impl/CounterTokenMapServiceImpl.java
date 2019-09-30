@@ -1,9 +1,7 @@
 package com.assign.service.impl;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,8 +34,7 @@ public class CounterTokenMapServiceImpl implements CounterTokenMapService {
 
 	@Override
 	public List<CounterTokenMap> getByCounterId(Long counterId) {
-		return getAll().parallelStream().filter(map -> map.getCounterId().equals(counterId))
-				.sorted(Comparator.comparing(CounterTokenMap::getTokenId)).collect(Collectors.toList());
+		return repo.findByCounterId(counterId);
 	}
 
 	@Override
