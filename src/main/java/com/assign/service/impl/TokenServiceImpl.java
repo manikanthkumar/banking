@@ -99,10 +99,13 @@ public class TokenServiceImpl implements TokenService {
 			throw new RuntimeException("Counters are Not Configured");
 		}
 		List<CounterTokenMap> maps = counterTokenMapService.getAll();
-		Long leastMaps = 0L;
+		Long leastMaps = null;
 		Long counterIdToSet = counters.get(0).getCounterId();
 		for (Counter counter : counters) {
 			Long count = maps.parallelStream().filter(map -> map.getCounterId().equals(counter.getCounterId())).count();
+			if (leastMaps == null) {
+				leastMaps = count;
+			}
 			if (count <= leastMaps) {
 				leastMaps = count;
 				counterIdToSet = counter.getCounterId();
