@@ -88,6 +88,9 @@ public class TokenServiceImplTest {
 		when(counterTokenMapService.getByCounterId(1L)).thenReturn(maps);
 		when(counterService.getCounterById(1L)).thenReturn(counters.get(0));
 		when(counterService.updateCounter(counters.get(0))).thenReturn(counters.get(0));
+		Optional<Token> token1 = Optional.of(token);
+		when(repo.findById(1L)).thenReturn(token1);
+		service.updateTokenStatus(TokenStatus.completed, 1L);
 	}
 
 	@Test
