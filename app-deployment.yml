@@ -1,0 +1,32 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: banking-service
+spec:
+  selector:
+    app: banking-service-label
+  ports:
+  - protocol: TCP
+    port: 8090
+    targetPort: 80
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: banking-service-deployment
+spec:
+  selector:
+      matchLabels:
+        app: banking-service-label
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: banking-service-label
+    spec:
+      containers:
+        - name: banking-service-container
+          image: gcr.io/kubernetes-learning-257009/banking-app-img
+          ports:
+            - containerPort: 80
